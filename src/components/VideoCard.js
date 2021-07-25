@@ -1,6 +1,7 @@
 import { Avatar, Box, Typography, makeStyles } from "@material-ui/core";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
+import Image from 'next/image';
 
 dayjs.extend(relativeTime)
 
@@ -21,7 +22,14 @@ function VideoCard({ item }){
     const classes = useStyles();
     return(
         <Box>
-            <img alt={item.title} src={item.thumb} className={classes.img}/>
+            <Image
+                width={500}
+                height={300}
+                alt={item.title}
+                src={item.thumb}
+                className={classes.img}
+                layout="intrinsic"
+            />
             <Box display="flex" mt="1">
                 <Box>
                     <Avatar alt={item.authorName} src={item.authorAvatar}>

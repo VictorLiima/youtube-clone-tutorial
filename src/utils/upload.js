@@ -9,7 +9,9 @@ aws.config.update({
     region: process.env.AWS_REGION,
 })
 
-var s3 = new aws.s3({})
+const s3 = new aws.S3({
+    /* ... */
+  });
 var upload = multer({
     storage: multerS3({
         s3,
@@ -17,15 +19,15 @@ var upload = multer({
         acl: 'public-read',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         metadata(req, file, cb){
-            cb(null, Date.now().toString());
+            cb(null, { fieldName: file.fieldname });
         },
         key(req, file, cb){
             crypto.randomBytes(16, (err, hash)=>{
                 if(err){
                     cb(err);
                 }
-                const fileName = `${hash.toString('hex')}-${file.originalName}`;
-
+                const fileName = `${hash.toString('hex')}-${file.originalname}`;
+                console.log(fileName);
                 cb(null, fileName);
             });
         }

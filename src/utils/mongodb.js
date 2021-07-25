@@ -3,8 +3,8 @@ import { MongoClient } from "mongodb";
 const DATABASE_URL = process.env.MONGODB_URL
 const DATABASE_NAME = process.env.MONGODB_NAME
 
-const DATABASE_CACHE;
-const CLIENT_CACHE;
+let DATABASE_CACHE;
+let CLIENT_CACHE;
 
 if(!DATABASE_URL){
     throw new Error(
